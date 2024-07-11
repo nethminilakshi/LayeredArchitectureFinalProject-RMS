@@ -350,6 +350,7 @@ import java.util.Optional;
                     txtCustomerId.setText(reservationDTO.getCusId());
                     txtDate.setValue(LocalDate.parse(reservationDTO.getDate()));
                     cmbTimeSlot.setValue(reservationDTO.getTime());
+                    cmbStatus.setValue(reservationDTO.getStatus());
 
 
 
