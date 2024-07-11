@@ -15,12 +15,16 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import lk.ijse.restaurantManagement.bo.BOFactory;
+import lk.ijse.restaurantManagement.bo.custom.CustomerBO;
 import lk.ijse.restaurantManagement.bo.custom.ReservationBO;
 import lk.ijse.restaurantManagement.bo.custom.TablesBO;
 import lk.ijse.restaurantManagement.dao.DAOFactory;
 import lk.ijse.restaurantManagement.dao.custom.impl.ReservationDAOImpl;
+import lk.ijse.restaurantManagement.dto.CustomerDTO;
 import lk.ijse.restaurantManagement.dto.ReservationDTO;
 import lk.ijse.restaurantManagement.dto.ReservationDetailDTO;
+import lk.ijse.restaurantManagement.dto.TablesDTO;
 import lk.ijse.restaurantManagement.util.Regex;
 import lk.ijse.restaurantManagement.util.TextField;
 import lk.ijse.restaurantManagement.view.tdm.ResevationCartTM;
@@ -90,9 +94,9 @@ import java.util.Optional;
         private JFXTextField txtReservationId;
 
         private final ObservableList<ResevationCartTM> cartList = FXCollections.observableArrayList();
-
-        ReservationBO reservationBO = (ReservationBO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOType.Reservation);
-        TablesBO tablesBO= (TablesBO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOType.Tables);
+        CustomerBO customerBO = (CustomerBO) BOFactory.getBoFactory().getBO(BOFactory.DAOType.Customer);
+        ReservationBO reservationBO = (ReservationBO) BOFactory.getBoFactory().getBO(BOFactory.DAOType.Reservation);
+        TablesBO tablesBO= (TablesBO) BOFactory.getBoFactory().getBO(BOFactory.DAOType.Tables);
 
         public void initialize(){
 
@@ -315,15 +319,15 @@ import java.util.Optional;
         }
 
 
-     /*   public void searchContactOnAction(ActionEvent actionEvent) {
+       public void searchContactOnAction(ActionEvent actionEvent) {
             String contact  = txtContact.getText();
 
             try {
-                Customer customer = CustomerRepo.searchByContact(contact);
+                CustomerDTO customerDTO = customerBO.searchCustomer(contact);
 
-                if (customer != null) {
-                    txtCustomerId.setText(customer.getCusId());
-                    txtContact.setText(customer.getContact());
+                if (customerDTO != null) {
+                    txtCustomerId.setText(customerDTO.getCusId());
+                    txtContact.setText(customerDTO.getContact());
                 } else {
                     new Alert(Alert.AlertType.INFORMATION, "Not Found Customer").show();
                 }
@@ -338,14 +342,14 @@ import java.util.Optional;
             String cusId  = txtCustomerId.getText();
 
             try {
-                Reservation reservation = ReservationRepo.searchById(cusId);
+                ReservationDTO reservationDTO = reservationBO.searchReservation(cusId);
 
-                if (reservation != null) {
-                    txtReservationId.setText(reservation.getReservationId());
-                    txtDescription.setText(reservation.getDescription());
-                    txtCustomerId.setText(reservation.getCusId());
-                    txtDate.setValue(LocalDate.parse(reservation.getDate()));
-                    cmbTimeSlot.setValue(reservation.getTime());
+                if (reservationDTO != null) {
+                    txtReservationId.setText(reservationDTO.getReservationId());
+                    txtDescription.setText(reservationDTO.getDescription());
+                    txtCustomerId.setText(reservationDTO.getCusId());
+                    txtDate.setValue(LocalDate.parse(reservationDTO.getDate()));
+                    cmbTimeSlot.setValue(reservationDTO.getTime());
 
 
 
@@ -359,7 +363,7 @@ import java.util.Optional;
         public void cmbTablesOnAction(ActionEvent actionEvent) {
             String tableId = cmbTableId.getValue();
             try {
-                Tables tables = TablesRepo.searchById(tableId);
+                TablesDTO tables = tablesBO.searchTables(tableId);
                 if (tables != null) {
                     txtAvailableQty.setText(String.valueOf(tables.getNoOfTables()));
 
@@ -371,7 +375,7 @@ import java.util.Optional;
             txtRequiredQty.requestFocus();
         }
 
-        public void searchOnAction(ActionEvent actionEvent) {
+       /* public void searchOnAction(ActionEvent actionEvent) {
             String date  = String.valueOf(txtDate.getValue());
 
             try {

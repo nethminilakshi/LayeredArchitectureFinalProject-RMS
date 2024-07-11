@@ -21,7 +21,7 @@ public class TablesBOImpl implements TablesBO {
     public boolean saveTables(TablesDTO dto) throws SQLException {
 
       return tablesDAO.save(new Tables(
-               dto.getTableId(),
+              dto.getTableId(),
               dto.getDescription(),
               dto.getNoOfTables(),
               dto.getNoOfSeats()

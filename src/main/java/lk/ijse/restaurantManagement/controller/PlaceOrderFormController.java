@@ -67,7 +67,7 @@ public class PlaceOrderFormController {
         private TableColumn<?, ?> coldate;
 
         @FXML
-        private TableView<OrderDetailTM> tblOrderDetails;
+        private TableView<OrderDetailTM> tblOrderCart;
 
         @FXML
         private JFXTextField txtCode;
@@ -142,6 +142,7 @@ public class PlaceOrderFormController {
 
 
     private void loadTable() {
+
         ObservableList<OrderDetailTM> tmList = FXCollections.observableArrayList();
 
         for (OrderDetailTM od : cartList) {
@@ -158,15 +159,15 @@ public class PlaceOrderFormController {
 
             tmList.add(odTm);
         }
-        tblOrderDetails.setItems(tmList);
-        OrderDetailTM selectedItem = tblOrderDetails.getSelectionModel().getSelectedItem();
+
+        tblOrderCart.setItems(tmList);
+        OrderDetailTM selectedItem = tblOrderCart.getSelectionModel().getSelectedItem();
         System.out.println("selectedItem = " + selectedItem);
     }
 
-        private void setDate() {
+    private void setDate() {
             String now = String.valueOf(LocalDate.now());
             txtDate.setText(now);
-
         }
 
         private String nextId(String currentId) {
@@ -211,15 +212,15 @@ public class PlaceOrderFormController {
                     Optional<ButtonType> type = new Alert(Alert.AlertType.INFORMATION, "Are you sure to remove?", yes, no).showAndWait();
 
                     if (type.orElse(no) == yes) {
-                        int selectedIndex = tblOrderDetails.getSelectionModel().getSelectedIndex();
+                        int selectedIndex = tblOrderCart.getSelectionModel().getSelectedIndex();
                         cartList.remove(selectedIndex);
 
-                        tblOrderDetails.refresh();
+                        tblOrderCart.refresh();
                         calculateNetTotal();
                     }
                 });
 
-                for (int i = 0; i < tblOrderDetails.getItems().size(); i++) {
+                for (int i = 0; i < tblOrderCart.getItems().size(); i++) {
                     if (id.equals(colItemCode.getCellData(i))) {
                         qty += cartList.get(i).getQty();
                         total = unitPrice * qty;
@@ -227,7 +228,7 @@ public class PlaceOrderFormController {
                         cartList.get(i).setQty(qty);
                         cartList.get(i).setTotal(total);
 
-                        tblOrderDetails.refresh();
+                        tblOrderCart.refresh();
                         calculateNetTotal();
                         txtQty.setText("");
                         return;
@@ -239,7 +240,7 @@ public class PlaceOrderFormController {
 
                 cartList.add(orderDetailTM);
 
-                tblOrderDetails.setItems(cartList);
+                tblOrderCart.setItems(cartList);
                 txtQty.setText("");
                 calculateNetTotal();
             }
@@ -248,7 +249,7 @@ public class PlaceOrderFormController {
 
         private void calculateNetTotal() {
             netTotal = 0;
-            for (int i = 0; i < tblOrderDetails.getItems().size(); i++) {
+            for (int i = 0; i < tblOrderCart.getItems().size(); i++) {
                 netTotal += (double) colTotal.getCellData(i);
             }
             txtNetTotal.setText(String.valueOf(netTotal));
@@ -274,7 +275,7 @@ public class PlaceOrderFormController {
                 var order = new OrderDTO(orderId,orderType, cusId, date);
 
                 List<OrderDetail> odList = new ArrayList<>();
-                for (int i = 0; i < tblOrderDetails.getItems().size(); i++) {
+                for (int i = 0; i < tblOrderCart.getItems().size(); i++) {
                     OrderDetailTM tm = cartList.get(i);
 
                     OrderDetail od = new OrderDetail(
