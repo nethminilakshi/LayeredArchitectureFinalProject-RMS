@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.ColorAdjust?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.restaurantManagement.controller.RegisterFormController">
+   <children>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" height="702.0" layoutY="-2.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="1000.0" />
+      <ImageView fitHeight="733.0" fitWidth="515.0" layoutX="469.0" layoutY="-95.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../assets.icon/stories-unsplash.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="91.0" fitWidth="80.0" layoutX="893.0" layoutY="31.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../assets.icon/food-png-6.png" />
+         </image>
+         <effect>
+            <ColorAdjust contrast="0.15" hue="1.0" />
+         </effect>
+      </ImageView>
+      <Label layoutX="699.0" layoutY="36.0" prefHeight="26.0" prefWidth="178.0" text="Cinnamon-7" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="30.0" />
+         </font>
+      </Label>
+      <Label layoutX="701.0" layoutY="71.0" prefHeight="8.0" prefWidth="159.0" text="Seafood Restaurant" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="17.0" />
+         </font>
+      </Label>
+      <Text fill="#fffffff2" layoutX="156.0" layoutY="108.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SIGN UP" wrappingWidth="147.19998168945312">
+         <font>
+            <Font name="Corbel Bold" size="35.0" />
+         </font>
+      </Text>
+      <Label layoutX="61.0" layoutY="184.0" text="User ID" textFill="WHITE">
+         <font>
+            <Font name="Corbel Bold" size="22.0" />
+         </font>
+      </Label>
+      <Label layoutX="61.0" layoutY="305.0" text="Username" textFill="WHITE">
+         <font>
+            <Font name="Corbel Bold" size="22.0" />
+         </font>
+      </Label>
+      <Label layoutX="61.0" layoutY="426.0" prefHeight="28.0" prefWidth="110.0" text=" Password" textFill="WHITE">
+         <font>
+            <Font name="Corbel Bold" size="22.0" />
+         </font>
+      </Label>
+      <JFXButton layoutX="53.0" layoutY="556.0" onAction="#btnRegisterOnAction" prefHeight="21.0" prefWidth="354.0" ripplerFill="WHITE" style="-fx-background-color: #E67F1F; -fx-background-radius: 20;" text="Sign Up" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </JFXButton>
+      <Line endX="0.5333251953125" layoutX="270.0" layoutY="126.0" startX="-100.0" stroke="WHITE" />
+      <JFXTextField fx:id="txtUserId" layoutX="57.0" layoutY="203.0" onKeyReleased="#txtUserIdOnKeyReleased" prefHeight="50.0" prefWidth="344.0" style="-fx-text-fill: white;">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </JFXTextField>
+      <JFXTextField fx:id="txtUserName" layoutX="58.0" layoutY="324.0" onKeyReleased="#txtUserNameOnKeyReleased" prefHeight="50.0" prefWidth="344.0" style="-fx-text-fill: white;">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </JFXTextField>
+      <JFXTextField fx:id="txtPassword" layoutX="58.0" layoutY="445.0" onKeyReleased="#txtPasswordOnKeyReleased" prefHeight="50.0" prefWidth="344.0" style="-fx-text-fill: white;">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </JFXTextField>
+   </children>
+</AnchorPane>
