@@ -147,7 +147,7 @@ public class PlaceOrderFormController {
 
         for (OrderDetailTM od : cartList) {
             OrderDetailTM odTm = new OrderDetailTM(
-                    od.getCode(),
+                    od.getId(),
                     od.getDescription(),
                     od.getQty(),
                     od.getUnitPrice(),
@@ -237,7 +237,6 @@ public class PlaceOrderFormController {
                 }
 
                 OrderDetailTM orderDetailTM = new OrderDetailTM(id, description, qty, unitPrice, total, date, btnRemove);
-
                 cartList.add(orderDetailTM);
 
                 tblOrderCart.setItems(cartList);
@@ -274,13 +273,13 @@ public class PlaceOrderFormController {
 
                 var order = new OrderDTO(orderId,orderType, cusId, date);
 
-                List<OrderDetail> odList = new ArrayList<>();
+                List<OrderDetailDTO> odList = new ArrayList<>();
                 for (int i = 0; i < tblOrderCart.getItems().size(); i++) {
                     OrderDetailTM tm = cartList.get(i);
 
-                    OrderDetail od = new OrderDetail(
+                    OrderDetailDTO od = new OrderDetailDTO(
                             orderId,
-                            tm.getCode(),
+                            tm.getId(),
                             tm.getQty(),
                             tm.getUnitPrice()
                     );
@@ -288,7 +287,8 @@ public class PlaceOrderFormController {
                 }
 
                 try {
-                    boolean isPlaced = saveOrder(orderId,orderType,cusId,date, (List<OrderDetailDTO>) order);
+                    boolean isPlaced = saveOrder(orderId,orderType,cusId,date, odList);
+
                     if(isPlaced) {
                         new Alert(Alert.AlertType.CONFIRMATION, "order placed!").show();
                     } else {

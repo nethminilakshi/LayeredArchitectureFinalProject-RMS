@@ -3,7 +3,7 @@ package lk.ijse.restaurantManagement.view.tdm;
 import com.jfoenix.controls.JFXButton;
 
 public class OrderDetailTM {
-    private String code;
+    private String id;
     private String description;
     private int qty;
     private double unitPrice;
@@ -14,8 +14,8 @@ public class OrderDetailTM {
     public OrderDetailTM() {
     }
 
-    public OrderDetailTM(String code, String description, int qty, double unitPrice, double total, String date, JFXButton btnRemove) {
-        this.code = code;
+    public OrderDetailTM(String id, String description, int qty, double unitPrice, double total, String date, JFXButton btnRemove) {
+        this.id = id;
         this.description = description;
         this.qty = qty;
         this.unitPrice = unitPrice;
@@ -24,12 +24,12 @@ public class OrderDetailTM {
         this.btnRemove = btnRemove;
     }
 
-    public String getCode() {
-        return code;
+    public String getId() {
+        return id;
     }
 
-    public void setCode(String code) {
-        this.code = code;
+    public void setId(String code) {
+        this.id = id;
     }
 
     public String getDescription() {
@@ -83,7 +83,7 @@ public class OrderDetailTM {
     @Override
     public String toString() {
         return "CartTM{" +
-                "id='" + code + '\'' +
+                "id='" + id + '\'' +
                 ", description='" + description + '\'' +
                 ", qty=" + qty +
                 ", unitPrice=" + unitPrice +

@@ -28,7 +28,10 @@ public class PurchaseOrderBOImpl implements PurchaseOrderBO {
                 boolean isOrderSaved = orderDAO.save(new Order(orderId,orderType,cusId,date));
                 if (isOrderSaved) {
                     for (OrderDetailDTO orderDetails : details) {
-                        OrderDetail orderDetail = new OrderDetail(orderDetails.getOrderId(),orderDetails.getItemId(),orderDetails.getQty(),orderDetails.getUnitPrice());
+                        OrderDetail orderDetail = new OrderDetail(orderDetails.getOrderId(),
+                                orderDetails.getItemId(),
+                                orderDetails.getQty(),
+                                orderDetails.getUnitPrice());
                         boolean isOrderDetailSaved = orderDetailsDAO.save(orderDetail);
                         if (isOrderDetailSaved) {
                             boolean isItemQtyUpdate = itemDAO.updateQty(orderDetail);

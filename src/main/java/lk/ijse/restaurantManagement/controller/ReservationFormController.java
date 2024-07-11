@@ -259,7 +259,7 @@ import java.util.Optional;
 
 
                 try {
-                    boolean isPlaced = saveReservation(reservationId,description,cusId,date,time,status,(List<ReservationDetailDTO>) reservation);
+                    boolean isPlaced = saveReservation(reservationId,description,cusId,date,time,status, reservationDetailsList);
                     if(isPlaced) {
                         new Alert(Alert.AlertType.CONFIRMATION, "Reservation Ok!").show();
                     } else {
